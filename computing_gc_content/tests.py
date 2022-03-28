@@ -2,14 +2,15 @@ from pathlib import Path
 
 import pytest
 
-from .solution import solve
+from .solution import get_max_record
+from utils import parse_fasta_text
 
 
 @pytest.fixture
 def example():
     with open(Path(__file__).parent / "example.txt") as f:
-        return f.read()
+        return parse_fasta_text(f.read())
 
 
 def test_compute_gc_content(example):
-    assert solve(example) == ("Rosalind_0808", 60.91954022988506)
+    assert get_max_record(example) == ("Rosalind_0808", 60.91954022988506)

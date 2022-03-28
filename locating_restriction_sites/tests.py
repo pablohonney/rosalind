@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from .solution import locate_restriction_sites
+from utils import parse_fasta_text
 
 
 @pytest.fixture
@@ -10,14 +11,14 @@ def example():
     root = Path(__file__).parent
 
     with open(root / "input_1.txt") as f:
-        raw_input = f.read().split()
-    input_dna = "".join(raw_input[1:])
+        fasta_records = parse_fasta_text(f.read())
+    input_dna = fasta_records[0].text
 
     with open(root / "output_1.txt") as f:
         raw_output = f.read().split("\n")
-    expected_output = [tuple(map(int, line.split())) for line in raw_output]
+    output_sites = [tuple(map(int, line.split())) for line in raw_output]
 
-    return input_dna, expected_output
+    return input_dna, output_sites
 
 
 def test_locate_restriction_sites_no_short_runs():
@@ -39,6 +40,6 @@ def test_locate_restriction_sites():
 
 
 def test_example(example):
-    input_dna, output_sites = example
+    input_dna, expected_output = example
     restriction_sites = locate_restriction_sites(input_dna)
-    assert restriction_sites == output_sites
+    assert restriction_sites == expected_output
