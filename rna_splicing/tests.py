@@ -14,4 +14,7 @@ def example() -> ParsedInput:
 
 
 def test_rna_splicing(example: ParsedInput):
-    assert solve(example.dna, example.introns, TRANSLATION_TABLE) == "MVYIADKQHVASREAYGHMFKVCA"
+    assert (
+        solve(example.dna, example.introns, TRANSLATION_TABLE)
+        == "MVYIADKQHVASREAYGHMFKVCA"
+    )
