@@ -1,6 +1,5 @@
 from typing import NamedTuple, List
 
-
 NEW_RECORD_STARTER = ">Rosalind"
 
 
@@ -41,3 +40,7 @@ def parse_fasta_text_2(text: str) -> List[FastaRecord]:
         cleaned_line = _line.replace("\n", "")
         records.append(FastaRecord(name, cleaned_line))
     return records
+
+
+START_CODON = "ATG"
+STOP_CODONS = ["TAG", "TGA", "TAA"]
