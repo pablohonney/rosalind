@@ -23,4 +23,4 @@ def test_example():
     n = 5
     print(gene_orders_count(n))
     for p in enumerate_gene_orders(n):
-        print(' '.join(map(str, p)))
+        print(" ".join(map(str, p)))

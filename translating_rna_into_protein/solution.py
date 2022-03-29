@@ -15,7 +15,10 @@ with open(Path(__file__).parent / "translation_table.txt") as f:
 TRANSLATION_TABLE = get_translation_table(translation_data)
 
 
-def translate(translation_table: dict, rna: str) -> str:
+def translate(rna: str, translation_table: dict = None) -> str:
+    if not translation_table:
+        translation_table = TRANSLATION_TABLE
+
     protein = []
     for i in range(0, len(rna) - 2, 3):
         amino_acid = translation_table[rna[i : i + 3]]
