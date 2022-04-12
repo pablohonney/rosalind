@@ -3,6 +3,9 @@ from collections import Counter, defaultdict
 
 
 class ProfileMatrix:
+    """
+    Represents nucleotide counts per column in parallel dna text.
+    """
     KEYS = "ATGC"
 
     def __init__(self, dna_sets: T.List[str]):
@@ -19,11 +22,10 @@ class ProfileMatrix:
         for key, counts in self.matrix.items():
             print(f"{key}: " + " ".join(map(str, counts)))
 
-
-def calculate_consensus(profile_matrix: ProfileMatrix) -> str:
-    data = list(profile_matrix.matrix.items())
-    consensus = []
-    for i in range(profile_matrix.length):
-        data.sort(key=lambda x: x[1][i], reverse=True)
-        consensus.append(data[0][0])
-    return "".join(consensus)
+    def calculate_consensus(self) -> str:
+        data = list(self.matrix.items())
+        consensus = []
+        for i in range(self.length):
+            data.sort(key=lambda x: x[1][i], reverse=True)
+            consensus.append(data[0][0])
+        return "".join(consensus)

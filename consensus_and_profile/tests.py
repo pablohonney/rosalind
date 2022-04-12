@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from .solution import ProfileMatrix, calculate_consensus
+from .solution import ProfileMatrix
 from utils import parse_fasta_text
 
 ROOT = Path(__file__).parent
@@ -44,7 +44,7 @@ def test_profile_matrix_and_consensus(example_1):
     profile_matrix = ProfileMatrix(dnas)
     assert profile_matrix.matrix == expected_profile
 
-    assert calculate_consensus(profile_matrix) == expected_consensus
+    assert profile_matrix.calculate_consensus() == expected_consensus
 
 
 def test_profile_matrix_and_consensus_2(example_2):
@@ -53,4 +53,4 @@ def test_profile_matrix_and_consensus_2(example_2):
     profile_matrix = ProfileMatrix(dnas)
     assert profile_matrix.matrix == expected_profile
 
-    assert calculate_consensus(profile_matrix) == expected_consensus
+    assert profile_matrix.calculate_consensus() == expected_consensus
