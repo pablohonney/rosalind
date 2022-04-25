@@ -3,7 +3,7 @@ import typing as T
 Subsequence = T.List[int]
 
 
-def find_spliced_motif_naive(text: str, motif: str) -> Subsequence:
+def find_spliced_motif_first_match(text: str, motif: str) -> Subsequence:
     subsequence = []
     motif_i = 0
     for text_i, text_char in enumerate(text):
@@ -21,7 +21,7 @@ class SplicedMotifFinder:
         self._motif = motif
         self._motif_occurrences = self._get_motif_occurrences(text, motif)
 
-    def find_spliced_motif(self) -> T.Generator[Subsequence, None, None]:
+    def find_spliced_motifs(self) -> T.Generator[Subsequence, None, None]:
         yield from self._find_spliced_motif(motif_index=0, previous_index=-1)
 
     @staticmethod

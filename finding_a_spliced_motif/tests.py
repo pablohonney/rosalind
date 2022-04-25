@@ -1,13 +1,13 @@
-from .solution import find_spliced_motif_naive, SplicedMotifFinder
+from .solution import find_spliced_motif_first_match, SplicedMotifFinder
 
 
-def test_find_spliced_motif_naive():
-    assert find_spliced_motif_naive(text="ACGTACGTGACG", motif="GTA") == [3, 4, 5]
+def test_find_spliced_motif_first_match():
+    assert find_spliced_motif_first_match(text="ACGTACGTGACG", motif="GTA") == [3, 4, 5]
 
 
 def test_find_spliced_motif():
     subsequence_indices = list(
-        SplicedMotifFinder(text="ACGTACGTGACG", motif="GTA").find_spliced_motif()
+        SplicedMotifFinder(text="ACGTACGTGACG", motif="GTA").find_spliced_motifs()
     )
     assert subsequence_indices == [[3, 4, 5], [3, 4, 10], [3, 8, 10], [7, 8, 10]]
 
@@ -17,8 +17,8 @@ def test_find_spliced_motif_example():
     motif = "GACATATCCGGGTGCCTTCCATTGGTCAATGAATTCCGT"
     first_expected_subsequence = [1, 6, 16, 18, 21, 22, 25, 36, 40, 41, 47, 49, 53, 55, 60, 62, 66, 68, 69, 70, 71, 75, 82, 84, 88, 91, 93, 97, 98, 109, 111, 112, 118, 123, 127, 132, 139, 145, 149]  # fmt: skip
 
-    subsequence_indices = find_spliced_motif_naive(text, motif)
+    subsequence_indices = find_spliced_motif_first_match(text, motif)
     assert subsequence_indices == first_expected_subsequence
 
-    walker = SplicedMotifFinder(text=text, motif=motif).find_spliced_motif()
+    walker = SplicedMotifFinder(text=text, motif=motif).find_spliced_motifs()
     assert next(walker) == first_expected_subsequence
