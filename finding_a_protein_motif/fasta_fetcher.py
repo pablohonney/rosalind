@@ -20,12 +20,17 @@ class FastaDTO:
         return Bio.SeqIO.parse(io.StringIO(self.text), self.format)
 
     def get_sequence(self) -> str:
-        head_entry = next(self._parse())
-        return str(head_entry.seq)
+        first_entry = next(self._parse())
+        return str(first_entry.seq)
 
 
 def get_fasta_from_uniprot_id(uniprot_id: str) -> FastaDTO:
     """Fetch fasta data from uniprot database"""
-    response = requests.get(f"http://www.uniprot.org/uniprot/{uniprot_id}.fasta")
-    assert response.status_code == requests.codes.OK
+    url = f"http://www.uniprot.org/uniprot/{uniprot_id}.fasta"
+
+    response = requests.get(url)
+    assert (
+        response.status_code == requests.codes.OK
+    ), f"Failed to fetch fasta from {url}"
+
     return FastaDTO(uniprot_id, response.text)

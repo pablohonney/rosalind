@@ -3,7 +3,7 @@ import re
 
 from .fasta_fetcher import FastaDTO
 
-N_GLYCOSYLATION_MOTIF_PATTERN = r"N[^P][S|T][^P]"
+N_GLYCOSYLATION_MOTIF_PATTERN = r"N[^P][ST][^P]"
 
 
 class ProteinMotifFinder:
