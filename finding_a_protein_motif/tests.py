@@ -24,7 +24,8 @@ def test_protein_motif_finder():
     for uniprot_id, expected_indices in uniprot_ids_and_motif_start_indices:
         fasta_dto = get_fasta_from_uniprot_id(uniprot_id)
         motif_start_indices = ProteinMotifFinder(
-            fasta=fasta_dto, motif_pattern=N_GLYCOSYLATION_MOTIF_PATTERN
+            sequence=fasta_dto.get_sequence(),
+            motif_pattern=N_GLYCOSYLATION_MOTIF_PATTERN,
         ).find_motifs()
 
         assert expected_indices == motif_start_indices
@@ -50,7 +51,8 @@ def test_exercise():
     for uniprot_id in uniprot_ids:
         fasta_dto = get_fasta_from_uniprot_id(uniprot_id)
         motif_start_indices = ProteinMotifFinder(
-            fasta=fasta_dto, motif_pattern=N_GLYCOSYLATION_MOTIF_PATTERN
+            sequence=fasta_dto.get_sequence(),
+            motif_pattern=N_GLYCOSYLATION_MOTIF_PATTERN,
         ).find_motifs()
 
         print_results(motif_start_indices, uniprot_id)
