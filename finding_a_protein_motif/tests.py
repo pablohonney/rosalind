@@ -1,6 +1,6 @@
 import typing as T
 
-import unittest
+import pytest
 
 from .fasta_fetcher import get_fasta_from_uniprot_id
 from .solution import ProteinMotifFinder
@@ -31,7 +31,7 @@ def test_protein_motif_finder():
         assert expected_indices == motif_start_indices
 
 
-@unittest.skip("used to pass the rosalind level")
+@pytest.mark.skip("used to pass the rosalind level")
 def test_exercise():
     uniprot_ids = [
         "P02725_GLP_PIG",
